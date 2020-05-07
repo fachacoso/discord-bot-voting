@@ -33,14 +33,20 @@ def main():
     with open("settings.json", "r") as jsonFile:
         settings = json.load(jsonFile)
 
-    # Text to input saved in settings.json
+    # Read settings.json
+    browser = settings["browser"]
     email = settings["email"]
     password = settings["password"]
 
     # Checks settings.json was correctly edited
-    if email == "insert email here" || password == "insert password here":
-        print("""You must change the "email", and "password" element in the settings.json file
-        with your login information.""")
+    if browser == "insert broweser in lowercase here":
+         print('You must change the "browser" element in settings.json ' \
+         + 'to your preferred browser (in lowercase).')
+         print('Only "safari", "firefox", and "chrome" is supported.')
+         sys.exit(0)
+    if email == "insert email here" or password == "insert password here":
+        print('You must change the "email", and "password" element in the ' \
+        + 'settings.json file with your login information.')
         sys.exit(0)
 
     # Format for datetime object in json
@@ -72,12 +78,11 @@ def main():
 
 
     # Selenium
-    browser = settings["browser"]
-    if browser = "safari":
+    if browser == "safari":
         driver = webdriver.Safari()
-    elif browser = "firefox":
+    elif browser == "firefox":
         driver = webdriver.Firefox()
-    elif browser = "chrome":
+    elif browser == "chrome":
         driver = webdriver.Chrome()
     else:
         print("Invalid/unsupported browser inputted.  Please check settings.json")
