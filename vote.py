@@ -9,7 +9,7 @@ https://selenium-python.readthedocs.io/installation.html
 This script uses a json file and selenium to automate logging in and voting
 on the Discord bot website.
 
-You must edit the "email" and "password" element in the settings.json file
+You must edit the "browser", "email", and "password" element in the settings.json file
 with your login information in order for the script to log in.
 """
 
@@ -39,7 +39,7 @@ def main():
 
     # Checks settings.json was correctly edited
     if email == "insert email here" || password == "insert password here":
-        print("""You must change the "email" and "password" element in the settings.json file
+        print("""You must change the "email", and "password" element in the settings.json file
         with your login information.""")
         sys.exit(0)
 
@@ -72,7 +72,16 @@ def main():
 
 
     # Selenium
-    driver = webdriver.Safari()
+    browser = settings["browser"]
+    if browser = "safari":
+        driver = webdriver.Safari()
+    elif browser = "firefox":
+        driver = webdriver.Firefox()
+    elif browser = "chrome":
+        driver = webdriver.Chrome()
+    else:
+        print("Invalid/unsupported browser inputted.  Please check settings.json")
+        sys.exit(0)
 
     # Go to login page
     driver.get('https://top.gg/login?redir=%2Fbot%2F432610292342587392%2Fvote')
